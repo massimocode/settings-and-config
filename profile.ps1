@@ -25,6 +25,17 @@ function gf { git fetch --all $args }
 function gb { git branch $args }
 function git_push { git push $args }
 Set-Alias gp git_push -Force -Option AllScope
+function dob {
+  git remote prune origin
+  git branch --merged |
+    ForEach-Object { $_.Trim() } |
+    Where-Object {$_ -NotMatch "^\*"} |
+    Where-Object {-not ( $_ -Like "*master" )} |
+    ForEach-Object { git branch -d $_ }
+}
+function rewrite {
+  git filter-branch --env-filter "export GIT_COMMITTER_NAME='Massimo Hamilton' && export GIT_COMMITTER_EMAIL=massimo.hamilton@outlook.com && export GIT_AUTHOR_NAME='Massimo Hamilton' && export GIT_AUTHOR_EMAIL=massimo.hamilton@outlook.com" -- --branches
+}
 function prg {
   new-pull-request "/compare/master...massimocode:"
 }
