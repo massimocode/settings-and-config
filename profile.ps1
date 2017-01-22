@@ -64,13 +64,13 @@ function tslint { node node_modules/tslint/bin/tslint $args }
 function tsc { node node_modules/typescript/bin/tsc $args }
 function msbuild { & "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" $args }
 function open {
-  $solutionFile = Get-ChildItem '.' *.sln -Recurse | select -First 1;
+  $solutionFile = Get-ChildItem '.' *.sln -Recurse | Select-Object -First 1;
   if ($solutionFile) {
     Start-Process $solutionFile.FullName -WorkingDirectory $solutionFile.DirectoryName
   }
 }
 function build {
-  $solutionFile = Get-ChildItem '.' *.sln -Recurse | select -First 1;
+  $solutionFile = Get-ChildItem '.' *.sln -Recurse | Select-Object -First 1;
   if ($solutionFile) {
     & "C:\Program Files (x86)\NuGet\Visual Studio 2015\nuget.exe" restore $solutionFile
     msbuild $solutionFile
@@ -80,7 +80,7 @@ function p {
   ping www.google.co.uk -t
 }
 function hosts { code c:\windows\system32\drivers\etc\hosts }
-function renameall {
+function changeextension {
   $ext1 = $args[0];
   $ext2 = $args[1];
   Get-ChildItem ('*.' + $ext1) | Rename-Item -newname {  $_.name  -replace ("." + $ext1), ("." + $ext2)  }
