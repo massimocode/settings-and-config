@@ -1,0 +1,20 @@
+# To include this file, run the following command:
+# git config --global include.path "C:\projects\settings-and-config\.gitconfig"
+[http]
+	sslVerify = false
+[push]
+	default = current
+[core]
+	editor = code-insiders --wait
+[rebase]
+	autoStash = true
+[merge]
+	tool = kdiff3
+[mergetool "kdiff3"]
+	path = C:/Program Files/KDiff3/kdiff3.exe
+	trustExitCode = false
+[user]
+	name = Massimo Hamilton
+	email = massimo.hamilton@outlook.com
+[mergetool]
+	keepBackup = false

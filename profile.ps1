@@ -1,7 +1,7 @@
 # To configure this file to be dot sourced, do the following:
 #   1) code $env:userprofile\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
 #   2) Add the following line of code to the top of the file and save:
-#      . C:\projects\settings-and-config\profile.ps1 
+#      . C:\projects\settings-and-config\profile.ps1
 
 Set-Location ~
 
@@ -14,11 +14,13 @@ function nr { npm run $args }
 
 # Git
 function amend { git commit --amend }
+function merge { git mergetool }
 function gs { git status $args }
 function git_checkout { git checkout $args }
 Set-Alias gc git_checkout -Force -Option AllScope
 function gcm { git checkout master }
 function gr { git rebase $args }
+function grc { git rebase --continue }
 function gro { git rebase origin/master $args }
 function gru { git rebase upstream/master $args }
 function gf { git fetch --all $args }
