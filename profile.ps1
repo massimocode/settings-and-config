@@ -41,7 +41,7 @@ function new-pull-request {
   $branchName = (git branch | Where-Object {$_.trim().indexOf("*") -eq 0}).Substring(2);
   $prUrl = (git remote show $args[0])[1].Trim()
   $prUrl = $prUrl.Substring(11, $prUrl.Length - 15) + $args[1] + $branchName;
-  Start-Process microsoft-edge:$($prUrl);
+  Start-Process $($prUrl);
 }
 function deleteoldbranches
 {
@@ -52,18 +52,28 @@ function deleteoldbranches
     Where-Object {-not ( $_ -Like "*master" )} |
     ForEach-Object { git branch -d $_ }
 }
+function userme {
+  git config user.email "massimo.hamilton@outlook.com"
+  git config user.name "Massimo Hamilton"
+}
 
 # Navigation
 function proj { Set-Location "C:\projects" }
 
 # General
 function exp { explorer . }
+function aws { & "C:\Program Files\Amazon\AWSCLI\aws.exe" $args }
 function ep { code C:\projects\settings-and-config\profile.ps1 }
 function epl { code $env:userprofile\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 }
 function code { code-insiders $args }
 function gulp { node node_modules/gulp/bin/gulp $args }
+function grunt { node node_modules/grunt-cli/bin/grunt $args }
 function tslint { node node_modules/tslint/bin/tslint $args }
 function tsc { node node_modules/typescript/bin/tsc $args }
+function webpack { node_modules/.bin/webpack $args }
+function karma { node_modules/.bin/karma $args }
+function bower { node_modules/.bin/bower $args }
+function au { node_modules/.bin/au $args }
 function msbuild { & "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" $args }
 function open {
   $solutionFile = Get-ChildItem '.' *.sln -Recurse | Select-Object -First 1;
@@ -87,3 +97,8 @@ function changeextension {
   $ext2 = $args[1];
   Get-ChildItem ('*.' + $ext1) | Rename-Item -newname {  $_.name  -replace ("." + $ext1), ("." + $ext2)  }
 }
+function clearscreen {
+  [Console]::ResetColor();
+  Clear-Host;
+}
+Set-Alias cls clearscreen -Force -Option AllScope
