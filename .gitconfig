@@ -18,3 +18,5 @@
 	email = massimo.hamilton@outlook.com
 [mergetool]
 	keepBackup = false
+[credential]
+	helper = manager
