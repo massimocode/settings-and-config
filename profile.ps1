@@ -60,20 +60,23 @@ function userme {
 # Navigation
 function proj { Set-Location "C:\projects" }
 
+# NPM Local
+function au { node_modules/.bin/au $args }
+function bower { node_modules/.bin/bower $args }
+function grunt { node node_modules/.bin/grunt $args }
+function gulp { node_modules/.bin/gulp $args }
+function karma { node_modules/.bin/karma $args }
+function ng { node_modules/.bin/ng $args }
+function tsc { node_modules/.bin/tsc $args }
+function tslint { node_modules/.bin/tslint $args }
+function webpack { node_modules/.bin/webpack $args }
+
 # General
 function exp { explorer . }
 function aws { & "C:\Program Files\Amazon\AWSCLI\aws.exe" $args }
 function ep { code C:\projects\settings-and-config\profile.ps1 }
 function epl { code $env:userprofile\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 }
 function code { code-insiders $args }
-function gulp { node node_modules/gulp/bin/gulp $args }
-function grunt { node node_modules/grunt-cli/bin/grunt $args }
-function tslint { node node_modules/tslint/bin/tslint $args }
-function tsc { node node_modules/typescript/bin/tsc $args }
-function webpack { node_modules/.bin/webpack $args }
-function karma { node_modules/.bin/karma $args }
-function bower { node_modules/.bin/bower $args }
-function au { node_modules/.bin/au $args }
 function msbuild { & "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" $args }
 function open {
   $solutionFile = Get-ChildItem '.' *.sln -Recurse | Select-Object -First 1;
@@ -81,10 +84,16 @@ function open {
     Start-Process $solutionFile.FullName -WorkingDirectory $solutionFile.DirectoryName
   }
 }
+function nuget {
+  if (-not (Test-Path "$env:userprofile\nuget.exe")) {
+    Invoke-WebRequest "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" -OutFile "$env:userprofile\nuget.exe"
+  }
+  & "$env:userprofile\nuget.exe" $args
+}
 function build {
   $solutionFile = Get-ChildItem '.' *.sln -Recurse | Select-Object -First 1;
   if ($solutionFile) {
-    & "C:\Program Files (x86)\NuGet\Visual Studio 2015\nuget.exe" restore $solutionFile
+    nuget restore $solutionFile
     msbuild $solutionFile
   }
 }
