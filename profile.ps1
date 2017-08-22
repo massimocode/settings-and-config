@@ -52,6 +52,10 @@ function deleteoldbranches
     Where-Object {-not ( $_ -Like "*master" )} |
     ForEach-Object { git branch -d $_ }
 }
+function usersmh {
+  git config user.email "mahdihassan135@hotmail.com"
+  git config user.name "SMH110"
+}
 function userme {
   git config user.email "massimo.hamilton@outlook.com"
   git config user.name "Massimo Hamilton"
@@ -67,14 +71,15 @@ function grunt { node node_modules/.bin/grunt $args }
 function gulp { node_modules/.bin/gulp $args }
 function karma { node_modules/.bin/karma $args }
 function ng { node_modules/.bin/ng $args }
+function tns { node_modules/.bin/tns $args }
 function tsc { node_modules/.bin/tsc $args }
 function tslint { node_modules/.bin/tslint $args }
 function webpack { node_modules/.bin/webpack $args }
 
 # General
 function exp { explorer . }
-function aws { & "C:\Program Files\Amazon\AWSCLI\aws.exe" $args }
-function ep { code C:\projects\settings-and-config\profile.ps1 }
+function awscli { & "C:\Program Files\Amazon\AWSCLI\aws.exe" $args }
+function ep { code C:\projects\settings-and-config\ }
 function epl { code $env:userprofile\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 }
 function code { code-insiders $args }
 function msbuild { & "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" $args }
@@ -90,11 +95,17 @@ function nuget {
   }
   & "$env:userprofile\nuget.exe" $args
 }
+function opensm {
+  $solutionFile = Get-ChildItem '.' *.sln -Recurse | Select-Object -First 1;
+  if ($solutionFile) {
+    Start-Process $solutionFile.FullName -WorkingDirectory $solutionFile.DirectoryName /safemode
+  }
+}
 function build {
   $solutionFile = Get-ChildItem '.' *.sln -Recurse | Select-Object -First 1;
   if ($solutionFile) {
     nuget restore $solutionFile
-    msbuild $solutionFile
+    msbuild $solutionFile $args
   }
 }
 function p {
@@ -111,3 +122,9 @@ function clearscreen {
   Clear-Host;
 }
 Set-Alias cls clearscreen -Force -Option AllScope
+function awsprofile {
+  code $env:userprofile\.aws
+}
+function ilmerge {
+  & "C:\Program Files (x86)\Microsoft\ILMerge\ILMerge.exe" $args
+}
