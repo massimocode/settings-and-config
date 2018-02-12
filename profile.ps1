@@ -18,6 +18,8 @@ function merge { git mergetool }
 function gs { git status $args }
 function git_checkout { git checkout $args }
 Set-Alias gc git_checkout -Force -Option AllScope
+function git_checkout_branch { git checkout -b $args }
+Set-Alias gcb git_checkout_branch -Force -Option AllScope
 function gcm { git checkout master }
 function gr { git rebase $args }
 function grc { git rebase --continue }
@@ -71,6 +73,7 @@ function grunt { node node_modules/.bin/grunt $args }
 function gulp { node_modules/.bin/gulp $args }
 function karma { node_modules/.bin/karma $args }
 function ng { node_modules/.bin/ng $args }
+function sequelize { node_modules/.bin/sequelize $args }
 function tns { node_modules/.bin/tns $args }
 function tsc { node_modules/.bin/tsc $args }
 function tslint { node_modules/.bin/tslint $args }
@@ -115,7 +118,7 @@ function hosts { code c:\windows\system32\drivers\etc\hosts }
 function changeextension {
   $ext1 = $args[0];
   $ext2 = $args[1];
-  Get-ChildItem ('*.' + $ext1) | Rename-Item -newname {  $_.name  -replace ("." + $ext1), ("." + $ext2)  }
+  Get-ChildItem -Recurse ('*.' + $ext1) | Rename-Item -newname {  $_.name  -replace ("." + $ext1), ("." + $ext2)  }
 }
 function clearscreen {
   [Console]::ResetColor();

@@ -12,11 +12,13 @@
 	tool = kdiff3
 [mergetool "kdiff3"]
 	path = C:/Program Files/KDiff3/kdiff3.exe
-	trustExitCode = false
+	keepBackup = false
+[diff]
+	guitool = kdiff3
+[difftool "kdiff3"]
+	path = C:/Program Files/KDiff3/kdiff3.exe
 [user]
 	name = Massimo Hamilton
 	email = massimo.hamilton@outlook.com
-[mergetool]
-	keepBackup = false
 [credential]
 	helper = manager
