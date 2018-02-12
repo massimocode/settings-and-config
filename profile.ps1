@@ -118,6 +118,3 @@ function awsprofile {
 function ilmerge {
   & "C:\Program Files (x86)\Microsoft\ILMerge\ILMerge.exe" $args
 }
-function syncaudio {
-  robocopy "$home\Music" "D:\Music" /mir
-}
