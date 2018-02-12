@@ -66,19 +66,6 @@ function userme {
 # Navigation
 function proj { Set-Location "C:\projects" }
 
-# NPM Local
-function au { node_modules/.bin/au $args }
-function bower { node_modules/.bin/bower $args }
-function grunt { node node_modules/.bin/grunt $args }
-function gulp { node_modules/.bin/gulp $args }
-function karma { node_modules/.bin/karma $args }
-function ng { node_modules/.bin/ng $args }
-function sequelize { node_modules/.bin/sequelize $args }
-function tns { node_modules/.bin/tns $args }
-function tsc { node_modules/.bin/tsc $args }
-function tslint { node_modules/.bin/tslint $args }
-function webpack { node_modules/.bin/webpack $args }
-
 # General
 function exp { explorer . }
 function awscli { & "C:\Program Files\Amazon\AWSCLI\aws.exe" $args }
