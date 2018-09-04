@@ -12,6 +12,7 @@
 	tool = kdiff3
 [mergetool "kdiff3"]
 	path = C:/Program Files/KDiff3/kdiff3.exe
+[mergetool]
 	keepBackup = false
 [diff]
 	guitool = kdiff3
