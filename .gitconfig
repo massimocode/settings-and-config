@@ -6,6 +6,7 @@
 	default = current
 [core]
 	editor = code-insiders --wait
+	excludesfile = C:/projects/settings-and-config/.gitignore_global
 [rebase]
 	autoStash = true
 [merge]
