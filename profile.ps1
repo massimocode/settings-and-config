@@ -69,7 +69,7 @@ function proj { Set-Location "C:\projects" }
 function exp { explorer . }
 function ep { code C:\projects\settings-and-config\ }
 function epl { code $env:userprofile\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 }
-function msbuild { & "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" $args }
+function msbuild { & "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\MSBuild.exe" $args }
 function open {
     $solutionFile = Get-ChildItem '.' *.sln -Recurse | Select-Object -First 1;
     if ($solutionFile) {
