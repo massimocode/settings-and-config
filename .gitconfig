@@ -5,7 +5,7 @@
 [push]
 	default = current
 [core]
-	editor = code-insiders --wait
+	editor = code --wait
 	excludesfile = C:/projects/settings-and-config/.gitignore_global
 [rebase]
 	autoStash = true

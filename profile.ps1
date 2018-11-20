@@ -69,7 +69,6 @@ function proj { Set-Location "C:\projects" }
 function exp { explorer . }
 function ep { code C:\projects\settings-and-config\ }
 function epl { code $env:userprofile\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 }
-function code { code-insiders $args }
 function msbuild { & "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" $args }
 function open {
     $solutionFile = Get-ChildItem '.' *.sln -Recurse | Select-Object -First 1;
@@ -142,4 +141,10 @@ function awsenv([string] $profileName) {
 function blat([string] $directory) {
     CMD /C "DEL /F/Q/S $directory" | Out-Null
     CMD /C "RMDIR /Q/S $directory" | Out-Null
+}
+function setdns([string] $serverAddress) {
+    Get-DnsClientServerAddress | Where-Object AddressFamily -eq 2 | Set-DnsClientServerAddress -ServerAddresses ($serverAddress)
+}
+function resetdns() {
+    Get-DnsClientServerAddress | Where-Object AddressFamily -eq 2 | Set-DnsClientServerAddress -ResetServerAddresses
 }
