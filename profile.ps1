@@ -3,8 +3,6 @@
 #   2) Add the following line of code to the top of the file and save:
 #      . C:\projects\settings-and-config\profile.ps1
 
-Set-Location ~
-
 # NPM
 function npm_install { npm install $args }
 Set-Alias ni npm_install -Force -Option AllScope
@@ -18,8 +16,6 @@ function merge { git mergetool }
 function gs { git status $args }
 function git_checkout { git checkout $args }
 Set-Alias gc git_checkout -Force -Option AllScope
-function git_checkout_branch { git checkout -b $args }
-Set-Alias gcb git_checkout_branch -Force -Option AllScope
 function gcm { git checkout master }
 function gr { git rebase $args }
 function grc { git rebase --continue }
@@ -40,7 +36,7 @@ function pru {
 }
 function new-pull-request {
     (git log HEAD...HEAD^)[4].Trim() | clip
-    $branchName = (git branch | Where-Object {$_.trim().indexOf("*") -eq 0}).Substring(2);
+    $branchName = (git branch | Where-Object { $_.trim().indexOf("*") -eq 0 }).Substring(2);
     $prUrl = (git remote show $args[0])[1].Trim()
     $prUrl = $prUrl.Substring(11, $prUrl.Length - 15) + $args[1] + $branchName;
     Start-Process $($prUrl);
@@ -49,8 +45,8 @@ function deleteoldbranches {
     git remote prune origin
     git branch --merged |
         ForEach-Object { $_.Trim() } |
-        Where-Object {$_ -NotMatch "^\*"} |
-        Where-Object {-not ( $_ -Like "*master" )} |
+        Where-Object { $_ -NotMatch "^\*" } |
+        Where-Object { -not ( $_ -Like "*master" ) } |
         ForEach-Object { git branch -d $_ }
 }
 function usersmh {
@@ -96,13 +92,13 @@ function build {
     }
 }
 function p {
-    ping www.google.co.uk -t
+    Test-Connection -ComputerName www.google.com -Count 999999
 }
 function hosts { code c:\windows\system32\drivers\etc\hosts }
 function changeextension {
     $ext1 = $args[0];
     $ext2 = $args[1];
-    Get-ChildItem -Recurse ('*.' + $ext1) | Rename-Item -newname {  $_.name -replace ("." + $ext1), ("." + $ext2)  }
+    Get-ChildItem -Recurse ('*.' + $ext1) | Rename-Item -newname { $_.name -replace ("." + $ext1), ("." + $ext2) }
 }
 function guid {
     $guid = [guid]::NewGuid()
@@ -141,10 +137,4 @@ function awsenv([string] $profileName) {
 function blat([string] $directory) {
     CMD /C "DEL /F/Q/S $directory" | Out-Null
     CMD /C "RMDIR /Q/S $directory" | Out-Null
-}
-function setdns([string] $serverAddress) {
-    Get-DnsClientServerAddress | Where-Object AddressFamily -eq 2 | Set-DnsClientServerAddress -ServerAddresses ($serverAddress)
-}
-function resetdns() {
-    Get-DnsClientServerAddress | Where-Object AddressFamily -eq 2 | Set-DnsClientServerAddress -ResetServerAddresses
 }
